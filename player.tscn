@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://byhyr3wrsytco"]
+
+[ext_resource type="Script" uid="uid://0dt6n4m7dvc8" path="res://player.gd" id="1_4flbx"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vhcw5"]
+radius = 0.4
+height = 1.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_sh265"]
+size = Vector3(0.2, 0.2, 0.33)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vhcw5"]
+albedo_color = Color(0.96775085, 0, 0.3738938, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vhcw5"]
+radius = 0.4
+height = 1.5
+
+[node name="Player" type="CharacterBody3D" unique_id=138678044 node_paths=PackedStringArray("model", "climbing_raycast")]
+script = ExtResource("1_4flbx")
+model = NodePath("Player Mesh")
+climbing_raycast = NodePath("Climbing Raycast")
+
+[node name="Player Mesh" type="MeshInstance3D" parent="." unique_id=794742022]
+mesh = SubResource("CapsuleMesh_vhcw5")
+
+[node name="Forward" type="MeshInstance3D" parent="Player Mesh" unique_id=464459624]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -0.4)
+mesh = SubResource("BoxMesh_sh265")
+surface_material_override/0 = SubResource("StandardMaterial3D_vhcw5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1678043264]
+shape = SubResource("CapsuleShape3D_vhcw5")
+
+[node name="Climbing Raycast" type="RayCast3D" parent="." unique_id=1696325101]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+target_position = Vector3(0, 0, -1)
